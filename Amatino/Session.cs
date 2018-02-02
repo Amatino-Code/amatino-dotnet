@@ -12,6 +12,7 @@ namespace Amatino
     public class Session
     {
         private Action<Session> ready;
+        internal long sessionId;
 
         public Session(
             string secret,
@@ -24,11 +25,12 @@ namespace Amatino
         }
 
         public Session(
-            long session_id,
-            string api_key
+            long sessionId,
+            string apiKey
             )
         {
             ready = null;
+            this.sessionId = sessionId;
             return;
         }
 
@@ -43,6 +45,11 @@ namespace Amatino
         internal string Signature(string path, RequestData requestData)
         {
             return "placeholder";
+        }
+
+        internal string IdString()
+        {
+            return sessionId.ToString();
         }
     }
 }
