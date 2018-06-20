@@ -26,12 +26,12 @@ namespace Amatino
         private const string signatureHeaderName = "X-Signature";
         private const string sessionIdHeaderName = "X-Session-ID";
         private const string userAgent = "Amatino .NET";
-        private const string noSessionPath = "/authorisation/session";
+        private const string noSessionPath = "/session";
         private const string noSessionMethod = "POST";
         private const string requiredSessionMessage = @"
         A Session is required for all requests other than
         /authorisation/session + POST";
-        internal List<Dictionary<string, object>> responseData; 
+        internal dynamic responseData; 
 
 #if DEBUG
         private string apiEndpoint = "http://127.0.0.1:5000";
@@ -46,7 +46,6 @@ namespace Amatino
             UrlParameters urlParameters,
             string httpMethod
         ) {
-
             if (
                 session == null 
                 && (
@@ -54,7 +53,9 @@ namespace Amatino
                     || httpMethod != noSessionMethod
                 )
             ) {
-                throw new AmatinoRequestException(requiredSessionMessage);
+                Console.WriteLine(path);
+                Console.WriteLine(httpMethod);
+                throw new ApiRequestException(requiredSessionMessage);
             }
 
             string fullUrl;
@@ -67,7 +68,7 @@ namespace Amatino
                 fullUrl = apiEndpoint + path;
             }
 
-            HttpWebRequest request = HttpWebRequest.CreateHttp(fullUrl);
+            HttpWebRequest request = WebRequest.CreateHttp(fullUrl);
             request.UserAgent = userAgent;
             request.Method = httpMethod;
             if (session != null)
@@ -104,9 +105,17 @@ namespace Amatino
             response.Close();
             readStream.Close();
 
-            responseData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(
-                responseJson
-            );
+            try {
+                responseData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(
+                    responseJson
+                );
+            }
+            catch (JsonSerializationException) {
+                responseData = JsonConvert.DeserializeObject<Dictionary<string, object>>(
+                    responseJson
+                );
+            }
+
             return;
         }
 

@@ -4,10 +4,10 @@
 //
 // Author: hugh@amatino.io
 //
-/*
+
 using System;
 using System.Runtime.Serialization;
-
+/* 
 namespace Amatino
 {
     [DataContract]

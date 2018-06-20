@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>Amatino</PackageId>
-    <Version>0.0.1</Version>
+    <PackageId>amatino</PackageId>
+    <Version>0.0.2</Version>
     <Authors>hugh@amatino.io</Authors>
     <Company>Amatino Pty Ltd</Company>
-    <PackageTags>accounting;alpha;double-entry;double-entry accounting;accounting api;api;double entry;double entry accounting;</PackageTags>
+    <PackageTags>accounting;alpha;double-entry;api;"double entry";"double entry accounting";amatino</PackageTags>
     <PackageProjectUrl>https://amatino.io</PackageProjectUrl>
     <PackageIconUrl>https://content.amatino.io/images/20180629_AM_Logo_64px.png</PackageIconUrl>
-    <description>This is an initial package upload test. Useful functionality will follow in v0.0.2. Visit https://amatino.io/ for information about the Amatino double-entry accounting API.</description>
+    <description>C# .NET bindings for the Amatino API: Double-entry accounting as a service</description>
   </PropertyGroup>
 
   <ItemGroup>

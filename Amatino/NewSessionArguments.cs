@@ -36,7 +36,7 @@ namespace Amatino {
             Dictionary<string, object> rvObject;
             rvObject = new Dictionary<string, object>() {
                 {"secret", secret},
-                {"email", email},
+                {"account_email", email},
                 {"user_id", userId}
             };
             return rvObject;

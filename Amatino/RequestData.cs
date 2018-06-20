@@ -18,7 +18,14 @@ namespace Amatino
             return;
         }
 
-        internal RequestData(ApiEncodable encodableObject) {
+        internal RequestData(
+            ApiEncodable encodableObject,
+            bool overrideListing = false
+        ) {
+            if (overrideListing is true) {
+                objectData = encodableObject.AsSerialisableObject();
+                return;
+            }
             List<object> objectList = new List<object>();
             objectList.Add(encodableObject.AsSerialisableObject());
             objectData = objectList;
