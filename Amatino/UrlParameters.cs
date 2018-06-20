@@ -8,10 +8,15 @@ using System;
 
 namespace Amatino
 {
-    internal struct UrlParameters
+    internal class UrlParameters
     {
         private readonly String parameterString;
         
+        internal UrlParameters(string rawQueryString) {
+            parameterString = rawQueryString;
+            return;
+        }
+
         UrlParameters(Entity entity)
         {
             parameterString = "?entity_id=" + entity.id;
@@ -25,6 +30,7 @@ namespace Amatino
                 workingString += "&" + target.ToString();
             }
             parameterString = workingString;
+            return;
         }
 
         public override string ToString()

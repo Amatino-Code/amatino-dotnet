@@ -31,7 +31,7 @@ namespace Amatino
 #if DEBUG
         private string apiEndpoint = "http://127.0.0.1:5000";
 #else
-        private string apiEndpoint = "https://api.amatino.io;
+        private string apiEndpoint = "https://api.amatino.io";
 #endif
         private readonly Action callback;
 
