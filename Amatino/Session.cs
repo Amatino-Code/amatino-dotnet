@@ -12,8 +12,7 @@ namespace Amatino
 {
     public class Session
     {
-        private string apiPath = "/sessions";
-        private Action<Session> ready;
+        private string apiPath = "/session";
         internal long sessionId;
         internal string apiKey;
         internal long userId;
@@ -26,7 +25,7 @@ namespace Amatino
                 secret: secret,
                 email: email
             );
-            RequestData requestData = new RequestData(arguments);
+            RequestData requestData = new RequestData(arguments, true);
             ApiRequest request = new ApiRequest(
                 apiPath,
                 requestData,
@@ -34,7 +33,7 @@ namespace Amatino
                 null,
                 "POST"
             );
-            Dictionary<string, object> data = request.responseData[0];
+            Dictionary<string, object> data = request.responseData as Dictionary<string, object>;
             sessionId = (data["session_id"] as long?) ?? default(long);
             apiKey = data["api_key"] as string;
             userId = (data["user_id"] as long?) ?? default(long);
@@ -46,25 +45,10 @@ namespace Amatino
             string apiKey,
             long userId
         ) {
-            ready = null;
             this.sessionId = sessionId;
             this.apiKey = apiKey;
             this.userId = userId;
             return;
-        }
-
-        public void Delete() { }
-
-        internal void loadResponse(dynamic data)
-        {
-
-            ready(this);
-            return;
-        }
-           
-        internal string Signature(string path, RequestData requestData)
-        {
-            return "placeholder";
         }
 
         internal string IdString()
